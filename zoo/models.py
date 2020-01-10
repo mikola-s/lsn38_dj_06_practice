@@ -56,3 +56,10 @@ class Visitor(models.Model):
 class Ticket(models.Model):
     valid_until = models.DateTimeField(default=timezone.now() + timezone.timedelta(hours=24))
     age_range = models.ForeignKey(to=AgeRange, on_delete=models.SET_DEFAULT, default='all_age')
+    visitor = models.ForeignKey(to=Visitor, on_delete=models.CASCADE)
+
+
+class VisitingAnimals(models.Model):
+    visitor = models.ForeignKey(to=Visitor, on_delete=models.SET_DEFAULT, default='some_user')
+    animal = models.ForeignKey(to=Animal, on_delete=models.DO_NOTHING)
+    visit_time = models.DateTimeField(auto_now_add=True)
