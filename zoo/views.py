@@ -2,12 +2,12 @@ from django.shortcuts import render
 
 
 def index(request):
-    return None
+    return render(request, "zoo/index.html")
 
 
 def new(request):
-    return None
+    return render(request, "zoo/new.html")
 
 
 def final(request):
-    return None
+    return render(request, "zoo/final.html")
