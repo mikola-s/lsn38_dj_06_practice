@@ -11,3 +11,7 @@ def new(request):
 
 def final(request):
     return render(request, "zoo/final.html")
+
+
+def very_new(request):
+    return render(request, "zoo/very_new.html")
