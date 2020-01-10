@@ -1,3 +1,10 @@
 from django.contrib import admin
+from . import models
 
-# Register your models here.
+admin.site.register(models.AnimalType)
+admin.site.register(models.AnimalGender)
+admin.site.register(models.Animal)
+admin.site.register(models.Ticket)
+admin.site.register(models.AgeRange)
+admin.site.register(models.Visitor)
+admin.site.register(models.VisitingAnimals)
