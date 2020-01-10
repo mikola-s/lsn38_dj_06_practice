@@ -25,3 +25,12 @@ class Animal(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.animal_type})"
+
+
+class AgeRange(models.Model):
+    name = models.CharField(max_length=20, default='all_age')
+    age_from = models.PositiveSmallIntegerField(default=0)
+    age_to = models.PositiveSmallIntegerField(default=122)
+
+    def __str__(self):
+        return f"{self.name} (from {self.age_from} to {self.age_to})"
