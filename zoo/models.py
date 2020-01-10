@@ -34,3 +34,8 @@ class AgeRange(models.Model):
 
     def __str__(self):
         return f"{self.name} (from {self.age_from} to {self.age_to})"
+
+
+class Ticket(models.Model):
+    valid_until = models.DateTimeField(default=timezone.now() + timezone.timedelta(hours=24))
+    age_range = models.ForeignKey(to=AgeRange, on_delete=models.SET_DEFAULT, default='all_age')
