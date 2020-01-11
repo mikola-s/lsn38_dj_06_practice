@@ -21,7 +21,7 @@ class Gender(models.Model):
 
 class Animal(models.Model):
     animal_type = models.ForeignKey(to=AnimalType, on_delete=models.DO_NOTHING, blank=True, null=True)
-    gender = models.ForeignKey(to=Gender, on_delete=models.DO_NOTHING, blank=True, null=True)
+    gender = models.ForeignKey(to=Gender, on_delete=models.SET_NULL, blank=True, null=True)
     age = models.PositiveSmallIntegerField(blank=True, null=True)
     name = models.CharField(max_length=256, default='organism')
     incoming_time = models.DateTimeField(blank=True, null=True, default=timezone.now)
@@ -42,6 +42,7 @@ class AgeRange(models.Model):
 class Visitor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='visitor')
     age = models.PositiveSmallIntegerField(null=True, blank=True)
+    gender = models.ForeignKey(to=Gender, on_delete=models.SET_NULL, null=True, blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
