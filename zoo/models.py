@@ -12,7 +12,7 @@ class AnimalType(models.Model):
         return self.animal_type
 
 
-class AnimalGender(models.Model):
+class Gender(models.Model):
     gender = models.CharField(max_length=20)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class AnimalGender(models.Model):
 
 class Animal(models.Model):
     animal_type = models.ForeignKey(to=AnimalType, on_delete=models.DO_NOTHING, blank=True, null=True)
-    gender = models.ForeignKey(to=AnimalGender, on_delete=models.DO_NOTHING, blank=True, null=True)
+    gender = models.ForeignKey(to=Gender, on_delete=models.DO_NOTHING, blank=True, null=True)
     age = models.PositiveSmallIntegerField(blank=True, null=True)
     name = models.CharField(max_length=256, default='organism')
     incoming_time = models.DateTimeField(blank=True, null=True, default=timezone.now)
