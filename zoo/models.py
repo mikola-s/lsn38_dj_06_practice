@@ -70,3 +70,7 @@ class VisitingAnimals(models.Model):
     visitor = models.ForeignKey(to=Visitor, on_delete=models.SET_DEFAULT, default='some_user')
     animal = models.ForeignKey(to=Animal, on_delete=models.DO_NOTHING)
     visit_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        visit_time = self.visit_time.strftime("%Y-%m-%d %H:%M:%S")
+        return f"{self.animal} / {self.visitor} -- {visit_time}"
