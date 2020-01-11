@@ -15,3 +15,11 @@ def final(request):
 
 def very_new(request):
     return render(request, "zoo/very_new.html")
+
+
+def animal_list(request):
+    return None
+
+
+def animal_details(request, id):
+    return None
