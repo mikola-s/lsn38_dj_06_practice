@@ -52,11 +52,17 @@ class Visitor(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.visitor.save()
 
+    def __str__(self):
+        return self.user.username
+
 
 class Ticket(models.Model):
     valid_until = models.DateTimeField(default=timezone.now() + timezone.timedelta(hours=24))
     age_range = models.ForeignKey(to=AgeRange, on_delete=models.SET_DEFAULT, default='all_age')
     visitor = models.ForeignKey(to=Visitor, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Ticket {self.pk} {self.visitor.user.username} {self.valid_until}"
 
 
 class VisitingAnimals(models.Model):
