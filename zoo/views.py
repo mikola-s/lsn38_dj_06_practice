@@ -18,7 +18,7 @@ def very_new(request):
 
 
 def animal_list(request):
-    return None
+    return render(request, "zoo/animal_list.html")
 
 
 def animal_details(request, id):
