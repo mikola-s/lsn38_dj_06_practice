@@ -20,8 +20,8 @@ class AnimalGender(models.Model):
 
 
 class Animal(models.Model):
-    animal_type = models.ForeignKey(to=AnimalType, on_delete=models.SET_DEFAULT, default='this')
-    gender = models.ForeignKey(to=AnimalGender, on_delete=models.SET_DEFAULT, default='it')
+    animal_type = models.ForeignKey(to=AnimalType, on_delete=models.DO_NOTHING, blank=True, null=True)
+    gender = models.ForeignKey(to=AnimalGender, on_delete=models.DO_NOTHING, blank=True, null=True)
     age = models.PositiveSmallIntegerField(blank=True, null=True)
     name = models.CharField(max_length=256, default='organism')
     incoming_time = models.DateTimeField(blank=True, null=True, default=timezone.now)
@@ -40,7 +40,7 @@ class AgeRange(models.Model):
 
 
 class Visitor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='visitor')
     age = models.PositiveSmallIntegerField(null=True, blank=True)
 
     @receiver(post_save, sender=User)
@@ -50,7 +50,7 @@ class Visitor(models.Model):
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+        instance.visitor.save()
 
 
 class Ticket(models.Model):
