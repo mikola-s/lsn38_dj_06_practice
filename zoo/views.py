@@ -22,6 +22,11 @@ def very_new(request):
 
 class AnimalList(ListView):
     model = models.Animal
+    context_object_name = "animals"
+
+    def get_queryset(self):
+        super().get_queryset()
+        return models.Animal.objects.order_by("incoming_time").filter()
 
 
 class AnimalDetails(DetailView):

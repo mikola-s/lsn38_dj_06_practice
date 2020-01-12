@@ -3,5 +3,24 @@
 {% block content %}
 
     <h1>Animal list</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="/animal/{{ animal.pk }}">{{ animal.name }}</a></td>
+                <td>{{ animal.animal_type }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td>no animals</td>
+            </tr>
+        {% endfor %}
+
+    </table>
 
 {% endblock content %}
