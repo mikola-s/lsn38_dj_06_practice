@@ -73,4 +73,4 @@ class VisitingAnimals(models.Model):
 
     def __str__(self):
         visit_time = self.visit_time.strftime("%Y-%m-%d %H:%M:%S")
-        return f"{self.animal} / {self.visitor} -- {visit_time}"
+        return f"VISIT # {self.pk} TO {self.animal} WHO {self.visitor} WHEN {visit_time}"
