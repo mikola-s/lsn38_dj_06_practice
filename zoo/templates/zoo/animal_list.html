@@ -12,7 +12,7 @@
         {% for animal in animals %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="/animal/{{ animal.pk }}">{{ animal.name }}</a></td>
+                <td><a href="{% url 'zoo:animal_detail' animal.pk %}">{{ animal.name }}</a></td>
                 <td>{{ animal.animal_type }}</td>
             </tr>
         {% empty %}
