@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from . import models
 
 
 def index(request):
@@ -17,9 +20,9 @@ def very_new(request):
     return render(request, "zoo/very_new.html")
 
 
-def animal_list(request):
-    return render(request, "zoo/animal_list.html")
+class AnimalList(ListView):
+    model = models.Animal
 
 
-def animal_details(request, id):
-    return None
+class AnimalDetails(DetailView):
+    model = models.Animal
