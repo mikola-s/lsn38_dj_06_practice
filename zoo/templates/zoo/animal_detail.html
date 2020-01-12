@@ -2,6 +2,27 @@
 
 {% block content %}
 
-    <h1>animal detail</h1>
+    <h1>animal {{ animal.name }} detail</h1>
+
+    <table>
+        <tr>
+            <td>Gender</td>
+            <td>{{ animal.gender }}</td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>{{ animal.age }}</td>
+        </tr>
+        <tr>
+            <td>Visit in 5 minut</td>
+            <td>{{ visit_in_five_min }}</td>
+        </tr>
+        <tr>
+            <td>Total visit</td>
+            <td>{{ animal.visitinganimals_set.count }}</td>
+        </tr>
+    </table>
+    <br>
+    <a href="{% url 'zoo:animal_list' %}">HOME</a>
 
 {% endblock %}
