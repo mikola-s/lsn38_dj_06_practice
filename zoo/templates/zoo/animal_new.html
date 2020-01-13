@@ -1,0 +1,13 @@
+{% extends 'zoo/base.html' %}
+
+{# for task 06 #}
+
+{% block content %}
+
+    <form action="{% url 'zoo:animal_new' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="save">
+    </form>
+
+{% endblock content %}

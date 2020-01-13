@@ -1,6 +1,17 @@
 {% extends "zoo/base.html" %}
 
+{# for task 05, 06 #}
+
 {% block content %}
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 
     <h1>Animal list</h1>
     <table>
@@ -22,5 +33,7 @@
         {% endfor %}
 
     </table>
+    <br>
+    <a href="{% url 'zoo:animal_new' %}">NEW</a>
 
 {% endblock content %}

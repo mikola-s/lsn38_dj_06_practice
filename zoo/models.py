@@ -5,6 +5,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+# for task 04-
+
 class AnimalType(models.Model):
     animal_type = models.CharField(max_length=50)
 
