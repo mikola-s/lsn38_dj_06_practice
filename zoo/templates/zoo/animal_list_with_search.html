@@ -1,0 +1,35 @@
+{% extends 'zoo/base.html' %}
+
+{# for task 07 #}
+
+{% block content %}
+
+
+    <h1>Animal list</h1>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        {% for animal in animals %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'zoo:animal_detail' animal.pk %}">{{ animal.name }}</a></td>
+                <td>{{ animal.animal_type }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td>no animals</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{#    <br>#}
+{#    <a href="{% url 'zoo:animal_new' %}">NEW</a>#}
+{##}
+{#    <br>#}
+{#    <a href="{% url 'zoo:animal_list_with_search_form' %}">CLASS BASE</a>#}
+
+{% endblock content %}

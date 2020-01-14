@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from django.views.generic.base import TemplateView
+from django.views.generic import FormView
 from django.utils import timezone
 from django.contrib import messages
-from . import models
 from django.urls import reverse_lazy
+
+from . import models, forms
 
 
 def index(request):
@@ -65,3 +66,40 @@ class NewAnimalForm(CreateView):
         response = super().form_valid(form)
         messages.success(self.request, f'Animal add success!!!')
         return response
+
+
+class AnimalSearch(FormView):
+    """ for task 07 """
+
+    form_class = forms.SearchForm
+    http_method_names = ['get']
+    template_name = 'zoo/animal_list_with_search.html'
+
+    def get(self, request, *args, **kwargs):
+        print(request.GET)
+        return render(self.request, 'zoo/animal_list_with_search.html')
+
+
+class AnimalListWithSearch(ListView):
+    """ for task 07 """
+    context_object_name = 'animal'
+    template_name = 'zoo/animal_list_with_search.html'
+
+    def get(self, request, *args, **kwargs):
+        print(request.GET)
+        return render(self.request, 'zoo/animal_list_with_search.html')
+
+
+def animal_list_with_search(request):
+    """ fof task 07 in def """
+
+    form = forms.SearchForm(request.GET)
+    animal_list = models.Animal.objects.all()
+    if form.is_valid():
+        data = form.cleaned_data
+        if data['search']:
+            animal_list = animal_list.filter(name__contains=data['search'])
+        if data['gender']:
+            animal_list = animal_list.filter(gender=int(data['gender']))
+    context = {'form': form, 'animal_list': animal_list}
+    return render(request, 'zoo/animal_list_with_search.html', context)
