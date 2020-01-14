@@ -6,12 +6,16 @@
 
 
     <h1>Animal list</h1>
+
+    {{ animals }}
+
     <table>
         <tr>
             <th>#</th>
             <th>Name</th>
             <th>Type</th>
         </tr>
+
         {% for animal in animals %}
             <tr>
                 <td>{{ forloop.counter }}</td>

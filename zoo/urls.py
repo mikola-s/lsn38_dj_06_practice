@@ -11,8 +11,8 @@ from . import views
 app_name = "zoo"
 
 urlpatterns = [
-    path('', views.animal_list_with_search, name='animal_list_search'),  # for task 07 in def
-    path('animal_search/', views.AnimalListWithSearch.as_view(), name='animal_list_with_search_form'),  # for task 06
+    path('animal_search/', views.animal_list_with_search, name='animal_list_search'),  # for task 07 in def
+    path('', views.AnimalListWithSearch.as_view(), name='animal_list_with_search'),  # for task 06
     path('animal_list/', views.AnimalList.as_view(), name='animal_list'),  # task 05-
     path('animal/<int:pk>', views.AnimalDetails.as_view(), name='animal_detail'),  # task 05-
     path('new-animal/', views.NewAnimalForm.as_view(), name='animal_new'),  # task 01, 02, 03

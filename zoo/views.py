@@ -38,7 +38,7 @@ class AnimalList(ListView):
 
     def get_queryset(self):
         super().get_queryset()
-        return models.Animal.objects.order_by("incoming_time").filter()
+        return models.Animal.objects.order_by("incoming_time").all()
 
 
 class AnimalDetails(DetailView):
@@ -82,12 +82,28 @@ class AnimalSearch(FormView):
 
 class AnimalListWithSearch(ListView):
     """ for task 07 """
-    context_object_name = 'animal'
+    model = models.Animal
+    context_object_name = 'animals'
     template_name = 'zoo/animal_list_with_search.html'
+    queryset = model.objects.all()
 
-    def get(self, request, *args, **kwargs):
-        print(request.GET)
-        return render(self.request, 'zoo/animal_list_with_search.html')
+    # def get_queryset(self):
+    #     pass
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        print(self.object_list)
+        return qs
+
+    # def get(self, request, *args, **kwargs):
+    #     get = super().get(request, *args, **kwargs)
+    #     data = request.GET
+    #     if data:
+    #         if data['search']:
+    #             self.queryset = self.queryset.filter(name__contains=data['search'])
+    #         if data['gender']:
+    #             self.queryset = self.queryset.filter(gender=int(data['gender']))
+    #     return get
 
 
 def animal_list_with_search(request):
