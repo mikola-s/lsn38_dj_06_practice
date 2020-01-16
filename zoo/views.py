@@ -75,13 +75,10 @@ class AnimalSearch(FormView):
     http_method_names = ['get']
     template_name = 'zoo/animal_list_with_search.html'
 
-    def get(self, request, *args, **kwargs):
-        print(request.GET)
-        return render(self.request, 'zoo/animal_list_with_search.html')
-
 
 class AnimalListWithSearch(ListView):
-    """ for task 07 in generic view"""
+    """ for task 07 in generic view """
+
     http_method_names = ['get']
     model = models.Animal
     context_object_name = 'animals'
@@ -96,10 +93,10 @@ class AnimalListWithSearch(ListView):
     def get_queryset(self):
         qs = super().get_queryset()
         search = self.request.GET.get('search')
-        gender = int(self.request.GET.get('gender'))
+        gender = self.request.GET.get('gender')
 
         qs = qs.filter(name__contains=search) if search else qs
-        qs = qs.filter(gender=gender) if gender else qs
+        qs = qs.filter(gender=int(gender)) if gender else qs
         return qs
 
 

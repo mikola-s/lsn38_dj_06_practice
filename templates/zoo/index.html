@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <a href="/new/">new</a><br>
-    <a href="/verynew/">very new</a>
+    <a href="{% url 'zoo:new' %}">new</a><br>
+    <a href="{% url 'zoo:very_new' %}">very new</a>
 
 {% endblock content %}
