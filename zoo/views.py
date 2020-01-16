@@ -95,11 +95,11 @@ class AnimalListWithSearch(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        data = self.request.GET
-        if data.get('search'):
-            qs = qs.filter(name__contains=data['search'])
-        if data.get('gender'):
-            qs = qs.filter(gender=int(data['gender']))
+        search = self.request.GET.get('search')
+        gender = int(self.request.GET.get('gender'))
+
+        qs = qs.filter(name__contains=search) if search else qs
+        qs = qs.filter(gender=gender) if gender else qs
         return qs
 
 
