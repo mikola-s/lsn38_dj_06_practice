@@ -81,29 +81,26 @@ class AnimalSearch(FormView):
 
 
 class AnimalListWithSearch(ListView):
-    """ for task 07 """
+    """ for task 07 in generic view"""
+    http_method_names = ['get']
     model = models.Animal
     context_object_name = 'animals'
     template_name = 'zoo/animal_list_with_search.html'
     queryset = model.objects.all()
 
-    # def get_queryset(self):
-    #     pass
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        context.update({'form': forms.SearchForm(self.request.GET)})
+        return context
 
     def get_queryset(self):
         qs = super().get_queryset()
-        print(self.object_list)
+        data = self.request.GET
+        if data.get('search'):
+            qs = qs.filter(name__contains=data['search'])
+        if data.get('gender'):
+            qs = qs.filter(gender=int(data['gender']))
         return qs
-
-    # def get(self, request, *args, **kwargs):
-    #     get = super().get(request, *args, **kwargs)
-    #     data = request.GET
-    #     if data:
-    #         if data['search']:
-    #             self.queryset = self.queryset.filter(name__contains=data['search'])
-    #         if data['gender']:
-    #             self.queryset = self.queryset.filter(gender=int(data['gender']))
-    #     return get
 
 
 def animal_list_with_search(request):

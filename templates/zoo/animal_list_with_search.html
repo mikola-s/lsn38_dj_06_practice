@@ -4,10 +4,12 @@
 
 {% block content %}
 
+    <form action="#" method="get">
+        {{ form }}
+        <input type="submit" value="Search">
+    </form>
 
     <h1>Animal list</h1>
-
-    {{ animals }}
 
     <table>
         <tr>
@@ -29,11 +31,5 @@
         {% endfor %}
 
     </table>
-
-{#    <br>#}
-{#    <a href="{% url 'zoo:animal_new' %}">NEW</a>#}
-{##}
-{#    <br>#}
-{#    <a href="{% url 'zoo:animal_list_with_search_form' %}">CLASS BASE</a>#}
 
 {% endblock content %}
